@@ -1,5 +1,7 @@
 ﻿
 
+using System.Threading;
+using System.Xml.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -57,7 +59,7 @@ namespace SeleniumTestsWithoutPOM
 
         [Test]
 
-        public void FillTextBoxes() 
+        public void FillTextBoxes()
         {
             IWebDriver driver = new ChromeDriver();
 
@@ -85,8 +87,33 @@ namespace SeleniumTestsWithoutPOM
             driver.Quit();
         }
 
-       
+        [Test]
+
+        public void checkIfEmailTextBoxIsMarkedInRed()
+        {
+            IWebDriver driver = new ChromeDriver();
+
+            driver.Url = "https://demoqa.com/text-box";
+
+            IWebElement inputEmail = driver.FindElement(By.XPath("//*[@id='userEmail']"));
+            IWebElement buttonSumbit = driver.FindElement(By.XPath("//*[@id='submit']"));
+            //IWebElement incorrectEmailField = driver.FindElement(By.XPath("//input[@class='mr-sm-2 field-error form-control']"));
+            string expectedClassResult = "mr-sm-2 field-error form-control";
+            string actualClassResult = inputEmail.GetAttribute("class");
+
+            inputEmail.SendKeys("m");
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //method to scroll down the page because of ad banners covering "Submit" button 
+            js.ExecuteScript("window.scrollBy(0,800)");
+            buttonSumbit.Click();
+            //Thread.Sleep(10);
+
+            Assert.AreEqual(expectedClassResult, actualClassResult);
+           
+
+            //driver.Quit();
+        }
 
 
-    }
+
+    } 
 }
