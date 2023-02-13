@@ -1,8 +1,4 @@
-﻿
-
-using System.Threading;
-using System.Xml.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -86,7 +82,7 @@ namespace SeleniumTestsWithoutPOM
 
             driver.Quit();
         }
-        
+
         [Test]
 
         public void checkIfEmailTextBoxIsMarkedInRed()
@@ -96,7 +92,7 @@ namespace SeleniumTestsWithoutPOM
             driver.Url = "https://demoqa.com/text-box";
 
             IWebElement inputEmail = driver.FindElement(By.XPath("//*[@id='userEmail']"));
-            IWebElement buttonSumbit = driver.FindElement(By.XPath("//*[@id='submit']"));
+            IWebElement buttonSubmit = driver.FindElement(By.XPath("//*[@id='submit']"));
             //IWebElement incorrectEmailField = driver.FindElement(By.XPath("//input[@class='mr-sm-2 field-error form-control']")); Xpath su klase vietoj ID
             string expectedClassResult = "mr-sm-2 field-error form-control";
             string actualClassResult = inputEmail.GetAttribute("class");
@@ -104,7 +100,7 @@ namespace SeleniumTestsWithoutPOM
             inputEmail.SendKeys("m");
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //method to scroll down the page because of ad banners covering "Submit" button 
             js.ExecuteScript("window.scrollBy(0,800)");
-            buttonSumbit.Click();
+            buttonSubmit.Click();
             //Thread.Sleep(10); Bandžiau, įdėt šitą metodą, jei kartais nespėtų pasikeisti elemento klasė, kol geitasis testas runnina, bet nepadėjo..
 
             Assert.AreEqual(expectedClassResult, actualClassResult); //nesuprantu, kodėl actualResult paima vistiek originalią class reikšmę vietoj tos su error.. :(
@@ -114,5 +110,5 @@ namespace SeleniumTestsWithoutPOM
 
 
 
-    } 
+    }
 }
