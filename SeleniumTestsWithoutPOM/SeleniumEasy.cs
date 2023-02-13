@@ -53,7 +53,36 @@ namespace SeleniumTestsWithoutPOM
             Assert.AreEqual(expectedResult, actualResult);
 
             driver.Quit();
+        }
 
+        [Test]
+
+        public void FillTextBoxes() 
+        {
+            IWebDriver driver = new ChromeDriver();
+
+            driver.Url = "https://demoqa.com/text-box";
+
+            IWebElement inputFullName = driver.FindElement(By.XPath("//*[@id='userName']"));
+            IWebElement inputEmail = driver.FindElement(By.XPath("//*[@id='userEmail']"));
+            IWebElement inputCurrentAddress = driver.FindElement(By.XPath("//*[@id='currentAddress']"));
+            IWebElement inputPermanentAddress = driver.FindElement(By.XPath("//*[@id='permanentAddress']"));
+            IWebElement buttonSumbit = driver.FindElement(By.XPath("//*[@id='submit']"));
+            IWebElement output = driver.FindElement(By.XPath("//*[@id='output']"));
+
+            inputFullName.SendKeys("Monika Balandyte");
+            inputEmail.SendKeys("m.balandyte@gmail.com");
+            inputCurrentAddress.SendKeys("Gatves 24-2, Vilnius");
+            inputPermanentAddress.SendKeys("Gatves 24-2, Vilnius");
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //method to scroll down the page because of ad banners covering "Submit" button 
+            js.ExecuteScript("window.scrollBy(0,1000)");
+            buttonSumbit.Click();
+            string expectedResult = "Name:Monika Balandyte\r\nEmail:m.balandyte@gmail.com\r\nCurrent Address :Gatves 24-2, Vilnius\r\nPermananet Address :Gatves 24-2, Vilnius";
+            string actualResult = output.Text;
+
+            Assert.AreEqual(expectedResult, actualResult);
+
+            driver.Quit();
         }
 
        
