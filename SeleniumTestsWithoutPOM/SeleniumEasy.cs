@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.Extensions;
 
 namespace SeleniumTestsWithoutPOM
 {
@@ -95,12 +96,15 @@ namespace SeleniumTestsWithoutPOM
             IWebElement buttonSubmit = driver.FindElement(By.XPath("//*[@id='submit']"));
             //IWebElement incorrectEmailField = driver.FindElement(By.XPath("//input[@class='mr-sm-2 field-error form-control']")); Xpath su klase vietoj ID
             string expectedClassResult = "mr-sm-2 field-error form-control";
-            string actualClassResult = inputEmail.GetAttribute("class");
+            
 
             inputEmail.SendKeys("m");
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //method to scroll down the page because of ad banners covering "Submit" button 
-            js.ExecuteScript("window.scrollBy(0,800)");
+           /* IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //Java method to scroll down the page because of ad banners covering "Submit" button 
+            js.ExecuteScript("window.scrollBy(0,800)");*/
+            driver.ExecuteJavaScript("window.scrollBy(0,800)"); //C# method to scroll down the page
             buttonSubmit.Click();
+
+            string actualClassResult = inputEmail.GetAttribute("class");
             //Thread.Sleep(10); Bandžiau, įdėt šitą metodą, jei kartais nespėtų pasikeisti elemento klasė, kol geitasis testas runnina, bet nepadėjo..
 
             Assert.AreEqual(expectedClassResult, actualClassResult); //nesuprantu, kodėl actualResult paima vistiek originalią class reikšmę vietoj tos su error.. :(
