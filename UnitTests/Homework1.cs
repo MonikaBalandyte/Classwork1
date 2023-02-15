@@ -18,9 +18,7 @@ namespace UnitTests
         [Test]
         public void CheckIfTodayIsWednesday()
         {
-            DateTime currentDate = DateTime.Now;
-
-            DayOfWeek currentWeekday = currentDate.DayOfWeek;
+            DayOfWeek currentWeekday = DateTime.Now.DayOfWeek;
 
             Assert.AreEqual(DayOfWeek.Wednesday, currentWeekday);
         }
@@ -28,17 +26,14 @@ namespace UnitTests
         [Test]
         public void CheckIfNowIs13hour()
         {
-            DateTime currentDate = DateTime.Now;
-
-            int currentHour = currentDate.Hour;
+            int currentHour = DateTime.Now.Hour;
 
             Assert.AreEqual(13, currentHour);
-
         }
+
         [Test]
         public void CheckIfFourEvenNumbersAreBetween1and10Inclusive()
         {
-       
             int count = 0;
             for (int i = 1; i <= 10; i++)
             {
@@ -47,7 +42,6 @@ namespace UnitTests
                     count++;
                 }
             }
-
             Assert.AreEqual(4, count);
         }
     }
