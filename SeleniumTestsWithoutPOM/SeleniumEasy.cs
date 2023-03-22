@@ -89,18 +89,17 @@ namespace SeleniumTestsWithoutPOM
         public void checkIfEmailTextBoxIsMarkedInRed()
         {
             IWebDriver driver = new ChromeDriver();
-
             driver.Url = "https://demoqa.com/text-box";
 
             IWebElement inputEmail = driver.FindElement(By.XPath("//*[@id='userEmail']"));
             IWebElement buttonSubmit = driver.FindElement(By.XPath("//*[@id='submit']"));
             //IWebElement incorrectEmailField = driver.FindElement(By.XPath("//input[@class='mr-sm-2 field-error form-control']")); Xpath su klase vietoj ID
             string expectedClassResult = "mr-sm-2 field-error form-control";
-            
+
 
             inputEmail.SendKeys("m");
-           /* IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //Java method to scroll down the page because of ad banners covering "Submit" button 
-            js.ExecuteScript("window.scrollBy(0,800)");*/
+            /* IJavaScriptExecutor js = (IJavaScriptExecutor)driver; //Java method to scroll down the page because of ad banners covering "Submit" button 
+             js.ExecuteScript("window.scrollBy(0,800)");*/
             driver.ExecuteJavaScript("window.scrollBy(0,800)"); //C# method to scroll down the page
             buttonSubmit.Click();
 
@@ -112,7 +111,35 @@ namespace SeleniumTestsWithoutPOM
             driver.Quit();
         }
 
+        [Test]
 
+        public void checkIfEmailTextBoxIsMarkedInRed2()
+        {
+            string valueInputEmail = "invalidEmail";
 
+            IWebDriver driver = new ChromeDriver();
+            driver.Url = "https://demoqa.com/text-box";
+
+            IWebElement inputEmail = driver.FindElement(By.XPath("//*[@id='userEmail']"));
+            IWebElement buttonSubmit = driver.FindElement(By.XPath("//*[@id='submit']"));
+
+            IJavaScriptExecutor jse = (IJavaScriptExecutor)driver;
+            jse.ExecuteScript("window.scrollBy(0, 200)");
+
+            inputEmail.SendKeys(valueInputEmail);
+            buttonSubmit.Click();
+
+            // Patikriname, kad buvo uždėta papildoma klasė input elementui
+            Assert.IsTrue(inputEmail.GetAttribute("class").Contains("field-error"));
+
+            // Patikriname realią border spalvą
+            // Reikia palaukti, nes kitaip testas spėja nuskaityti seną spalvą ir failina
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual("rgb(255, 0, 0)", inputEmail.GetCssValue("border-color"));
+
+            driver.Quit();
+        }
     }
-}
+
+    } 
+
