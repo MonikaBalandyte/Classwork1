@@ -8,8 +8,6 @@ using OpenQA.Selenium.Chrome;
 
 namespace SeleniumFramework
 {
-   
-
     public class Driver
     {
         private static IWebDriver driver;
