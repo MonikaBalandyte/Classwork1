@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace SeleniumFramework
 {
+    
     public class Driver
-    {
+    { 
         private static IWebDriver driver;
 
         public static void SetupDriver()
