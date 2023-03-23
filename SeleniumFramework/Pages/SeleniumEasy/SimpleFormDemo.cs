@@ -1,7 +1,4 @@
 ﻿
-
-using System;
-
 namespace SeleniumFramework.Pages.SeleniumEasy1
 {
 
