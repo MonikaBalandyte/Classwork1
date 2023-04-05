@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 
 namespace SeleniumFramework.Pages
@@ -27,5 +23,12 @@ namespace SeleniumFramework.Pages
         {
             GetElement(locator).SendKeys(message);
         }
+
+        internal static void ScrollDown(IJavaScriptExecutor driver)
+        {
+            IJavaScriptExecutor jse = driver;
+            jse.ExecuteScript("window.scrollBy(0, 200)");
+        }
+
     }
 }

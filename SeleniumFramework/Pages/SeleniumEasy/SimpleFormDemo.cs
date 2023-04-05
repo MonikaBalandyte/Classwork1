@@ -1,4 +1,8 @@
 ﻿
+using System;
+using OpenQA.Selenium;
+using SeleniumFramework;
+
 namespace SeleniumFramework.Pages.SeleniumEasy1
 {
 
@@ -49,6 +53,53 @@ namespace SeleniumFramework.Pages.SeleniumEasy1
             string locator = "//*[@id='displayvalue']";
             return Common.GetElementText(locator);
         }
+
+        public static void EnterFullName(string fullName)
+        {
+            string locator = "//*[@id='userName']";
+            Common.SendKeys(locator, fullName);
+        }
+
+        public static void EnterEmail(string email)
+        {
+            string locator = "//*[@id='userEmail']";
+            Common.SendKeys(locator, email);
+        }
+
+        public static void EnterCurrentAddress(string currentAddress)
+        {
+            string locator = "//*[@id='currentAddress']";
+            Common.SendKeys(locator, currentAddress);
+        }
+
+        public static void EnterPermanentAddress(string permanentAddress)
+        {
+            string locator = "//*[@id='permanentAddress']";
+            Common.SendKeys(locator, permanentAddress);
+        }
+
+        public static void ScrollDownThePage()
+        {
+           // Common.ScrollDown();
+        }
+
+        public static void ClickButtonSubmit()
+        {
+            string locator = "//*[@id='submit']";
+            Common.ClickElement(locator);
+        }
+
+        public static string GetOutputMessage()
+        {
+            string locator = "//*[@id='output']";
+            return Common.GetElementText(locator);
+        }
     }
 }
 
+/* IWebElement inputFullName = driver.FindElement(By.XPath("//*[@id='userName']"));
+IWebElement inputEmail = driver.FindElement(By.XPath("//*[@id='userEmail']"));
+IWebElement inputCurrentAddress = driver.FindElement(By.XPath("//*[@id='currentAddress']"));
+IWebElement inputPermanentAddress = driver.FindElement(By.XPath("//*[@id='permanentAddress']"));
+IWebElement buttonSumbit = driver.FindElement(By.XPath("//*[@id='submit']"));
+IWebElement output = driver.FindElement(By.XPath("//*[@id='output']"));*/

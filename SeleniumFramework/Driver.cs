@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace SeleniumFramework
@@ -29,6 +30,11 @@ namespace SeleniumFramework
         public static void CloseDriver() 
         {
             driver.Quit();
+        }
+
+        public static void ExecuteJavaScript(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
