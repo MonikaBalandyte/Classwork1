@@ -7,6 +7,8 @@ namespace SeleniumFramework.Pages.SeleniumEasy
     {
         private static string inputSingleCheckbox = "//*[@id='isAgeSelected']";
         private static string fieldSingleCheckboxSuccessMessage = "//*[@id='txtAge']";
+        private static object inputsMultipleCheckbox = "";
+        private static string buttonMultipleCheckBoxes = "//*[@id='check1']";
 
         public static void Open()
         {
@@ -21,6 +23,16 @@ namespace SeleniumFramework.Pages.SeleniumEasy
         {
             return Common.GetElementText(fieldSingleCheckboxSuccessMessage);
 
+        }
+
+        public static void ClickEachOfMultipleCheckboxes()
+        {
+            Common.ClickElements(inputsMultipleCheckbox);
+        }
+
+        public static string GetMultipleCheckboxButtonText()
+        {
+            return Common.GetAttributeValue(buttonMultipleCheckBoxes, "value");
         }
     }
 }
