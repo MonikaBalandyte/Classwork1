@@ -1,7 +1,10 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace SeleniumFramework.Pages
 {
@@ -17,7 +20,7 @@ namespace SeleniumFramework.Pages
         }
         private static List<IWebElement> GetElements(string locator)
         {
-            return Driver.GetDriver().FindElement(By.XPath(locator)).ToList();
+            return Driver.GetDriver().FindElements(By.XPath(locator)).ToList();
         }
 
         internal static string GetElementText(string locator)
@@ -54,6 +57,17 @@ namespace SeleniumFramework.Pages
         internal static string GetAttributeValue(string buttonMultipleCheckBoxes, string v)
         {
             throw new NotImplementedException();
+        }
+
+        internal static void WaitForElementToBeClickable(string locator)
+        {
+            WebDriverWait wait = new WebDriverWait(Driver.GetDriver(), TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(locator)));
+        }
+
+        internal static bool CheckIfElementIsEnabled(string locator)
+        {
+            return GetElement(locator).Enabled;
         }
     }
 }
